@@ -7,8 +7,11 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { createTamagui, TamaguiProvider } from "tamagui";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import Header from "./src/components/Header";
-import Stories from "./src/components/Stories";
+import Header from "./src/components/Header/Header";
+import Stories from "./src/components/Stories/Stories";
+import Feeds from "./src/components/Feeds/Feeds";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 // import { RefreshControl } from "react-native-web";
 
 SplashScreen.preventAutoHideAsync();
@@ -43,6 +46,7 @@ const App = () => {
       <>
         <Header />
         <Stories />
+        <Feeds />
       </>
     );
   };
@@ -56,25 +60,32 @@ const App = () => {
   };
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1 }}>
-        <TamaguiProvider config={tamaguiConfig}>
-          <StatusBar style="light" backgroundColor="black" />
-          <FlatList
-            data={[{}]}
-            renderItem={ContentComponent}
-            contentContainerStyle={{
-              justifyContent: "flex-start",
-              backgroundColor: "white",
-            }}
-            onLayout={onLayoutRootView}
-            refreshControl={
-              <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
-            }
-          />
-        </TamaguiProvider>
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <GestureHandlerRootView>
+      <BottomSheetModalProvider>
+        <SafeAreaProvider>
+          <SafeAreaView style={{ flex: 1 }}>
+            <TamaguiProvider config={tamaguiConfig}>
+              <StatusBar style="light" backgroundColor="black" />
+              <FlatList
+                data={[{}]}
+                renderItem={ContentComponent}
+                contentContainerStyle={{
+                  justifyContent: "flex-start",
+                  backgroundColor: "white",
+                }}
+                onLayout={onLayoutRootView}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={isRefreshing}
+                    onRefresh={onRefresh}
+                  />
+                }
+              />
+            </TamaguiProvider>
+          </SafeAreaView>
+        </SafeAreaProvider>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 };
 

@@ -1,10 +1,9 @@
-import React from "react";
 import { FlatList, Text, TouchableOpacity } from "react-native";
-import ReusableStoryAvatar from "./ReusableStoryAvatar";
+import ReusableStoryAvatar from "../reusables/ReusableStory/ReusableStory.component";
 
 const StoryAvatar = ({ item }) => (
   <ReusableStoryAvatar
-    size={60}
+    size={80}
     imageUrl={item.imageUrl}
     hasActiveStory={item.hasActiveStory}
     hasAlreadyViewed={item.hasAlreadyViewed}
@@ -17,7 +16,7 @@ const StoryAvatarWithName = ({ item }) => {
       activeOpacity={0.8}
       style={{
         alignItems: "center",
-        maxWidth: 80,
+        maxWidth: 100,
       }}
     >
       <StoryAvatar item={item} />

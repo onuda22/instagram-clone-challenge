@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome6 } from "@expo/vector-icons";
-import Images from "../../assets/images";
+import Images from "../../../assets/images";
 
 const HeaderLeftSide = () => {
   return (
